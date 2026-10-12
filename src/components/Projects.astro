@@ -1,0 +1,102 @@
+---
+import ProjectCard from './ProjectCard.astro';
+import type { ProjectCardProps } from './ProjectCard.astro';
+
+interface Props {
+	label?: string;
+	projects?: ProjectCardProps[];
+}
+
+const {
+	label = 'Projects',
+	projects = [
+		{
+			title: 'Project 1',
+			summary: 'Used spectral graph theory in combinatorial optimization research on a variation of the Maximum Cut problem.',
+			href: '#project-1',
+		},
+		{
+			title: 'Project 2',
+			summary: 'Scheduled student clubs for the 2025-2026 school year using Google OR-Tools\' CP-STAT solver.',
+			href: '#project-2',
+		},
+		{
+			title: 'Project 3',
+			summary: 'Automated email sending through Google Apps Script, Python and regular expressions.',
+			href: '#project-3',
+		},
+	],
+} = Astro.props;
+
+const bottomSlant = '1.1rem';
+---
+
+<section class="projects-section" id="projects" aria-labelledby="projects-section-title">
+	<div class="projects-ribbon-shell" style={`--bottom-slant: ${bottomSlant};`}>
+		<div class="projects-ribbon">
+			<h2 class="projects-ribbon-text" id="projects-section-title">{label}</h2>
+		</div>
+	</div>
+
+	<div class="project-cards">
+		{projects.map((project) => <ProjectCard {...project} />)}
+	</div>
+</section>
+
+<style>
+	.projects-section {
+		display: flex;
+		flex-direction: column;
+		align-items: stretch;
+		gap: clamp(1rem, 3vh, 1.5rem);
+		width: 100%;
+		margin: clamp(2.5rem, 8vh, 4rem) 0 2rem;
+		padding: clamp(1.5rem, 4vh, 2.5rem) var(--page-padding-inline-end) 0
+			var(--page-padding-inline-start);
+		border-top: 1px solid rgba(160, 160, 160, 0.28);
+	}
+
+	.projects-ribbon-shell {
+		align-self: flex-start;
+		box-sizing: border-box;
+		width: var(--section-tag-width);
+		max-width: 100%;
+		filter: drop-shadow(0 0.85rem 1.75rem rgba(58, 63, 74, 0.22))
+			drop-shadow(0 0.35rem 0.85rem rgba(0, 0, 0, 0.08));
+	}
+
+	.projects-ribbon {
+		--ribbon-bg: #3a3f4a;
+
+		box-sizing: border-box;
+		width: 100%;
+		min-height: var(--section-tag-min-height);
+		margin: 0;
+		padding: var(--section-tag-padding);
+		background-color: var(--ribbon-bg);
+		color: #ffffff;
+		text-align: left;
+		clip-path: polygon(
+			0 0,
+			100% 0,
+			100% calc(100% - var(--bottom-slant)),
+			0 100%
+		);
+	}
+
+	.projects-ribbon-text {
+		margin: 0;
+		font-size: var(--section-tag-title-size);
+		font-weight: var(--section-tag-title-weight);
+		line-height: 1.15;
+		letter-spacing: -0.02em;
+		color: #ffffff;
+	}
+
+	.project-cards {
+		display: grid;
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+		gap: clamp(0.65rem, 2vw, 1rem);
+		width: 100%;
+	}
+</style>

@@ -1,0 +1,88 @@
+---
+interface Props {
+	label?: string;
+	body?: string;
+}
+
+const {
+	label = 'About',
+	body = 'Hi, I\'m Grace, a first-year at Yale University interested in optimization. In high school, I explored optimization from both theoretical and applied perspectives. With a professor and his PhD student at the University of British Columbia, I did combinatorical optimization research using spectral graph theory. Furthermore, I used optimization to schedule clubs at school, which helped my classmates commit to more clubs. Together, these two experiences helped me gain research skills and the ability to work with decision makers such as administrators. I look forward to undertaking more projects that both improve my technical skills and have a visible impact.',
+} = Astro.props;
+
+const bottomSlant = '1.1rem';
+---
+
+<section class="about-section" id="about" aria-labelledby="about-section-title">
+	<div class="about-ribbon-shell" style={`--bottom-slant: ${bottomSlant};`}>
+		<div class="about-ribbon">
+			<h2 class="about-ribbon-text" id="about-section-title">{label}</h2>
+		</div>
+	</div>
+	<div class="about-copy">
+		<p class="about-body">{body}</p>
+	</div>
+</section>
+
+<style>
+	.about-section {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: clamp(1rem, 3vh, 1.5rem);
+		width: 100%;
+		margin: clamp(2.5rem, 8vh, 4rem) 0 2rem;
+		padding: clamp(1.5rem, 4vh, 2.5rem) var(--page-padding-inline-end) 0
+			var(--page-padding-inline-start);
+		border-top: 1px solid rgba(160, 160, 160, 0.28);
+	}
+
+	.about-ribbon-shell {
+		box-sizing: border-box;
+		width: var(--section-tag-width);
+		max-width: 100%;
+		filter: drop-shadow(0 0.85rem 1.75rem rgba(58, 63, 74, 0.22))
+			drop-shadow(0 0.35rem 0.85rem rgba(0, 0, 0, 0.08));
+	}
+
+	.about-ribbon {
+		--ribbon-bg: #4e5560;
+
+		box-sizing: border-box;
+		width: 100%;
+		min-height: var(--section-tag-min-height);
+		margin: 0;
+		padding: var(--section-tag-padding);
+		background-color: var(--ribbon-bg);
+		color: #ffffff;
+		text-align: left;
+		clip-path: polygon(
+			0 0,
+			100% 0,
+			100% calc(100% - var(--bottom-slant)),
+			0 100%
+		);
+	}
+
+	.about-ribbon-text {
+		margin: 0;
+		font-size: var(--section-tag-title-size);
+		font-weight: var(--section-tag-title-weight);
+		line-height: 1.15;
+		letter-spacing: -0.02em;
+		color: #ffffff;
+	}
+
+	.about-copy {
+		width: 100%;
+		max-width: none;
+	}
+
+	.about-body {
+		margin: 0;
+		color: #8a8a8a;
+		font-size: 0.92rem;
+		font-weight: 400;
+		line-height: 1.55;
+		max-width: none;
+	}
+</style>

@@ -1,0 +1,82 @@
+@font-face {
+	font-family: 'JetBrainsMono Nerd Font';
+	src: url('https://cdn.jsdelivr.net/gh/ryanoasis/nerd-fonts@3.2.1/patched-fonts/JetBrainsMono/Ligatures/Regular/JetBrainsMonoNerdFont-Regular.woff2')
+		format('woff2');
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'JetBrainsMono Nerd Font';
+	src: url('https://cdn.jsdelivr.net/gh/ryanoasis/nerd-fonts@3.2.1/patched-fonts/JetBrainsMono/Ligatures/Bold/JetBrainsMonoNerdFont-Bold.woff2')
+		format('woff2');
+	font-weight: 700;
+	font-style: normal;
+	font-display: swap;
+}
+
+:root {
+	--page-wheat: #faf6ef;
+	--accent-line: rgba(160, 160, 160, 0.2);
+	--font-body: 'JetBrainsMono Nerd Font', 'JetBrains Mono', ui-monospace, monospace;
+	--section-tag-width: min(18rem, 100%);
+	--section-tag-min-height: 6rem;
+	--section-tag-padding: 2.15rem 1.35rem 2.45rem 1.3rem;
+	--section-tag-title-size: 1.75rem;
+	--section-tag-title-weight: 400;
+	--page-padding-inline-start: max(1.5rem, 12%);
+	--page-padding-inline-end: max(1.5rem, 8%);
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html {
+	height: 100%;
+	font-family: var(--font-body);
+}
+
+body {
+	margin: 0;
+	min-height: 100%;
+	background-color: var(--page-wheat);
+	font-family: inherit;
+}
+
+body::before,
+body::after {
+	content: '';
+	position: fixed;
+	inset: 0;
+	pointer-events: none;
+}
+
+/* A few horizontal section dividers */
+body::before {
+	background-image:
+		linear-gradient(var(--accent-line), var(--accent-line)),
+		linear-gradient(var(--accent-line), var(--accent-line)),
+		linear-gradient(var(--accent-line), var(--accent-line));
+	background-size: 100% 1px, 100% 1px, min(92%, 48rem) 1px;
+	background-repeat: no-repeat;
+	background-position:
+		0 5.75rem,
+		0 46%,
+		center calc(100% - 3.5rem);
+}
+
+/* A few vertical accents */
+body::after {
+	background-image:
+		linear-gradient(90deg, var(--accent-line), var(--accent-line)),
+		linear-gradient(90deg, var(--accent-line), var(--accent-line));
+	background-size: 1px 32vh, 1px 24vh;
+	background-repeat: no-repeat;
+	background-position:
+		max(1.5rem, 12%) 18%,
+		min(calc(100% - 1.5rem), 88%) 62%;
+}

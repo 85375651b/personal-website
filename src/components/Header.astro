@@ -1,0 +1,60 @@
+---
+interface Props {
+	name?: string;
+}
+
+const { name = 'Grace Guo' } = Astro.props;
+---
+
+<header class="site-header">
+	<nav class="nav" aria-label="Primary">
+		<a class="nav-link" href="#projects">Projects</a>
+		<a class="nav-link" href="#about">About</a>
+	</nav>
+	<h1 class="name">{name}</h1>
+</header>
+
+<style>
+	.site-header {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		align-items: baseline;
+		justify-content: flex-end;
+		gap: 1rem;
+		box-sizing: border-box;
+		width: 100%;
+		margin: 0;
+		padding: 1.5rem;
+		background-color: transparent;
+	}
+
+	.nav {
+		display: flex;
+		gap: 1rem;
+	}
+
+	.nav-link,
+	.name {
+		margin: 0;
+		color: #8a8a8a;
+		font-weight: 400;
+		text-decoration: none;
+	}
+
+	.nav-link {
+		font-size: 0.9375rem;
+		line-height: 1.45;
+	}
+
+	.nav-link:hover {
+		text-decoration: underline;
+		text-underline-offset: 0.2em;
+	}
+
+	.name {
+		font-size: 1.125rem;
+		line-height: 1.35;
+		letter-spacing: -0.01em;
+	}
+</style>

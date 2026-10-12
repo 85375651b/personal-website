@@ -1,0 +1,227 @@
+---
+interface Props {
+	name?: string;
+	blurb?: string;
+	aboutTitle?: string;
+	aboutBody?: string;
+	projectsTitle?: string;
+	projectsBody?: string;
+}
+
+const {
+	name = 'Grace Guo',
+	blurb = 'Freshman at Yale looking to major in Economics and Mathematics.',
+	aboutTitle = 'About',
+	aboutBody = 'More about me!',
+	projectsTitle = 'Projects',
+	projectsBody = 'See projects I\'ve worked on!',
+} = Astro.props;
+
+const introChamfer = '1.75rem';
+const cardBottomSlant = '1.1rem';
+---
+
+<div class="hero-cards">
+	<section
+		class="intro-card"
+		aria-label="Introduction"
+		style={`--chamfer: ${introChamfer};`}
+	>
+		<h2 class="intro-name">{name}</h2>
+		<p class="intro-blurb">{blurb}</p>
+	</section>
+
+	<div class="lower-row">
+		<a class="about-card-link" href="#about">
+			<div class="about-shell" style={`--bottom-slant: ${cardBottomSlant};`}>
+				<section class="about-card" aria-labelledby="about-card-title">
+					<h2 class="about-title" id="about-card-title">{aboutTitle}</h2>
+					<p class="about-body">{aboutBody}</p>
+				</section>
+			</div>
+		</a>
+
+		<a class="projects-card-link" href="#projects">
+			<div class="projects-shell" style={`--bottom-slant: ${cardBottomSlant};`}>
+				<section class="projects-card" aria-labelledby="projects-card-title">
+					<h2 class="projects-title" id="projects-card-title">{projectsTitle}</h2>
+					<p class="projects-body">{projectsBody}</p>
+				</section>
+			</div>
+		</a>
+	</div>
+</div>
+
+<style>
+	.hero-cards {
+		--stack-width: min(21.5rem, calc(50vw - 1.5rem));
+		--side-card-min-height: 10.5rem;
+
+		width: var(--stack-width);
+		margin: clamp(4.5rem, 13vh, 6.75rem) max(1.5rem, 8%) 2rem 50%;
+		display: flex;
+		flex-direction: column;
+		gap: 0.45rem;
+	}
+
+	.intro-card {
+		--card-bg: #1a1c22;
+
+		width: 100%;
+		margin: 0;
+		padding: 1.65rem 1.85rem 1.9rem 1.75rem;
+		background-color: var(--card-bg);
+		color: #ffffff;
+		clip-path: polygon(
+			0 0,
+			calc(100% - var(--chamfer)) 0,
+			100% var(--chamfer),
+			100% 100%,
+			0 100%
+		);
+		filter: drop-shadow(0 1.125rem 2.25rem rgba(26, 28, 34, 0.26))
+			drop-shadow(0 0.4rem 1rem rgba(0, 0, 0, 0.1));
+	}
+
+	.lower-row {
+		--side-card-width: min(14.5rem, 100%);
+
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+		column-gap: 0.35rem;
+		align-items: start;
+		width: calc(100% + 1.35rem);
+		margin-left: -1.35rem;
+	}
+
+	.about-card-link {
+		display: block;
+		width: var(--side-card-width);
+		max-width: 14.5rem;
+		color: inherit;
+		text-decoration: none;
+	}
+
+	.about-shell {
+		width: 100%;
+		filter: none;
+		transition: filter 0.2s ease;
+	}
+
+	.about-card-link:hover .about-shell,
+	.about-card-link:focus-visible .about-shell {
+		filter: drop-shadow(0.45rem 0.55rem 0 rgba(0, 0, 0, 0.14))
+			drop-shadow(0 1.1rem 1.6rem rgba(48, 108, 102, 0.22));
+	}
+
+	.about-card {
+		--teal: #5ec4bb;
+
+		box-sizing: border-box;
+		min-height: var(--side-card-min-height);
+		margin: 0;
+		padding: 1.45rem 1.35rem 1.85rem 1.3rem;
+		background-color: var(--teal);
+		color: #121212;
+		clip-path: polygon(
+			0 0,
+			100% 0,
+			100% calc(100% - var(--bottom-slant)),
+			0 100%
+		);
+	}
+
+	.projects-card-link {
+		display: block;
+		width: var(--side-card-width);
+		max-width: 14.5rem;
+		justify-self: end;
+		color: inherit;
+		text-decoration: none;
+	}
+
+	.projects-shell {
+		width: 100%;
+		filter: none;
+		transition: filter 0.2s ease;
+	}
+
+	.projects-card-link:hover .projects-shell,
+	.projects-card-link:focus-visible .projects-shell {
+		filter: drop-shadow(0 0.85rem 1.75rem rgba(58, 63, 74, 0.22))
+			drop-shadow(0 0.35rem 0.85rem rgba(0, 0, 0, 0.08));
+	}
+
+	.projects-card {
+		--card-bg: #3a3f4a;
+
+		box-sizing: border-box;
+		min-height: var(--side-card-min-height);
+		margin: 0;
+		padding: 1.45rem 1.35rem 1.85rem 1.3rem;
+		background-color: var(--card-bg);
+		color: #ffffff;
+		clip-path: polygon(
+			0 0,
+			100% 0,
+			100% calc(100% - var(--bottom-slant)),
+			0 100%
+		);
+	}
+
+	.intro-name,
+	.intro-blurb,
+	.about-title,
+	.about-body,
+	.projects-title,
+	.projects-body {
+		margin: 0;
+		text-align: left;
+	}
+
+	.intro-name {
+		font-size: 1.35rem;
+		font-weight: 600;
+		line-height: 1.25;
+		letter-spacing: -0.02em;
+		color: #ffffff;
+	}
+
+	.intro-blurb {
+		margin-top: 0.65rem;
+		font-size: 0.9rem;
+		font-weight: 400;
+		line-height: 1.55;
+		color: rgba(255, 255, 255, 0.82);
+	}
+
+	.about-title {
+		font-size: 1.35rem;
+		font-weight: 600;
+		line-height: 1.25;
+		letter-spacing: -0.02em;
+	}
+
+	.about-body {
+		margin-top: 0.75rem;
+		font-size: 0.76rem;
+		font-weight: 400;
+		line-height: 1.48;
+	}
+
+	.projects-title {
+		font-size: 1.35rem;
+		font-weight: 600;
+		line-height: 1.25;
+		letter-spacing: -0.02em;
+		color: #ffffff;
+	}
+
+	.projects-body {
+		margin-top: 0.75rem;
+		font-size: 0.76rem;
+		font-weight: 400;
+		line-height: 1.48;
+		color: rgba(255, 255, 255, 0.86);
+	}
+</style>

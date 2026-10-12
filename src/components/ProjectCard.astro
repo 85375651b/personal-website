@@ -1,0 +1,65 @@
+---
+export interface ProjectCardProps {
+	title: string;
+	summary: string;
+	href?: string;
+}
+
+interface Props extends ProjectCardProps {}
+
+const { title, summary, href } = Astro.props;
+---
+
+<article class="project-card">
+	<h3 class="project-card-title">{title}</h3>
+	<p class="project-card-summary">
+		{summary}
+		{
+			href ? (
+				<>
+					{' '}
+					<a class="project-card-link" href={href}>View project</a>
+				</>
+			) : null
+		}
+	</p>
+</article>
+
+<style>
+	.project-card {
+		box-sizing: border-box;
+		height: 100%;
+		margin: 0;
+		padding: 1rem 1rem 1.1rem;
+		border: 1px solid rgba(190, 190, 190, 0.65);
+		background-color: #efedea;
+		color: #8a8a8a;
+	}
+
+	.project-card-title {
+		margin: 0;
+		font-size: 0.95rem;
+		font-weight: 600;
+		line-height: 1.35;
+		letter-spacing: -0.02em;
+		color: #8a8a8a;
+	}
+
+	.project-card-summary {
+		margin: 0.5rem 0 0;
+		font-size: 0.8rem;
+		font-weight: 400;
+		line-height: 1.5;
+		color: #8a8a8a;
+	}
+
+	.project-card-link {
+		color: inherit;
+		text-decoration: underline;
+		text-underline-offset: 0.18em;
+	}
+
+	.project-card-link:hover {
+		color: #6a6a6a;
+	}
+</style>
