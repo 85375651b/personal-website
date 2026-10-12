@@ -1,32 +1,34 @@
 ---
 import ProjectCard from './ProjectCard.astro';
 import type { ProjectCardProps } from './ProjectCard.astro';
+import { withBase } from '../lib/withBase';
 
 interface Props {
 	label?: string;
 	projects?: ProjectCardProps[];
 }
 
-const {
-	label = 'Projects',
-	projects = [
-		{
-			title: 'Project 1',
-			summary: 'Used spectral graph theory in combinatorial optimization research on a variation of the Maximum Cut problem.',
-			href: '#project-1',
-		},
-		{
-			title: 'Project 2',
-			summary: 'Scheduled student clubs for the 2025-2026 school year using Google OR-Tools\' CP-STAT solver.',
-			href: '#project-2',
-		},
-		{
-			title: 'Project 3',
-			summary: 'Automated email sending through Google Apps Script, Python and regular expressions.',
-			href: '#project-3',
-		},
-	],
-} = Astro.props;
+const defaultProjects: ProjectCardProps[] = [
+	{
+		title: 'Project 1',
+		summary:
+			'Used spectral graph theory in combinatorial optimization research on a variation of the Maximum Cut problem.',
+		href: withBase('projects/Project1'),
+	},
+	{
+		title: 'Project 2',
+		summary:
+			'Scheduled student clubs for the 2025-2026 school year using Google OR-Tools\' CP-STAT solver.',
+		href: withBase('projects/Project2'),
+	},
+	{
+		title: 'Project 3',
+		summary: 'Automated email sending through Google Apps Script, Python and regular expressions.',
+		href: withBase('projects/Project3'),
+	},
+];
+
+const { label = 'Projects', projects = defaultProjects } = Astro.props;
 
 const bottomSlant = '1.1rem';
 ---

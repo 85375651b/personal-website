@@ -1,0 +1,116 @@
+---
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { withBase } from '../../lib/withBase';
+import '../../styles/style.css';
+
+const title = 'Project 1';
+const bottomSlant = '1.1rem';
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href={withBase('favicon.svg')} />
+		<link rel="icon" href={withBase('favicon.ico')} />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title} · Grace Guo</title>
+	</head>
+	<body>
+		<Header />
+		<main class="project-detail">
+			<div class="project-ribbon-shell" style={`--bottom-slant: ${bottomSlant};`}>
+				<div class="project-ribbon">
+					<h1 class="project-ribbon-text">{title}</h1>
+				</div>
+			</div>
+			<div class="project-copy">
+				<p class="project-body">
+					Working with a professor and PhD student at the University of British Columbia, I researched
+					combinatorial optimization, specifically a
+					variation of the Maximum Cut problem. We designed an algorithm involving spectral graph theory, connecting graph eigenstructure to approximation quality.
+				</p>
+				<p class="project-body">
+					<a class="project-back-link" href={withBase('#projects')}>← Back to projects</a>
+				</p>
+			</div>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	.project-detail {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: clamp(1rem, 3vh, 1.5rem);
+		width: 100%;
+		margin: clamp(1.5rem, 5vh, 2.5rem) 0 2rem;
+		padding: clamp(1rem, 3vh, 1.5rem) var(--page-padding-inline-end) 0
+			var(--page-padding-inline-start);
+	}
+
+	.project-ribbon-shell {
+		box-sizing: border-box;
+		width: var(--section-tag-width);
+		max-width: 100%;
+		filter: drop-shadow(0 0.85rem 1.75rem rgba(58, 63, 74, 0.22))
+			drop-shadow(0 0.35rem 0.85rem rgba(0, 0, 0, 0.08));
+	}
+
+	.project-ribbon {
+		--ribbon-bg: #3a3f4a;
+
+		box-sizing: border-box;
+		width: 100%;
+		min-height: var(--section-tag-min-height);
+		margin: 0;
+		padding: var(--section-tag-padding);
+		background-color: var(--ribbon-bg);
+		color: #ffffff;
+		text-align: left;
+		clip-path: polygon(0 0, 100% 0, 100% calc(100% - var(--bottom-slant)), 0 100%);
+	}
+
+	.project-ribbon-text {
+		margin: 0;
+		font-size: var(--section-tag-title-size);
+		font-weight: var(--section-tag-title-weight);
+		line-height: 1.15;
+		letter-spacing: -0.02em;
+		color: #ffffff;
+	}
+
+	.project-copy {
+		width: 100%;
+		max-width: none;
+	}
+
+	.project-lead {
+		margin: 0;
+		color: #6a6a6a;
+		font-size: 0.95rem;
+		font-weight: 600;
+		line-height: 1.5;
+	}
+
+	.project-body {
+		margin: 1rem 0 0;
+		color: #8a8a8a;
+		font-size: 0.92rem;
+		font-weight: 400;
+		line-height: 1.55;
+	}
+
+	.project-back-link {
+		color: inherit;
+		text-decoration: underline;
+		text-underline-offset: 0.18em;
+	}
+
+	.project-back-link:hover {
+		color: #6a6a6a;
+	}
+</style>
